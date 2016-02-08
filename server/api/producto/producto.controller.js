@@ -74,6 +74,14 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+export function obtenerProductoPorCodigo(req, res) {
+  console.log(req.params.id);
+  Producto.findOne({ codigo: req.params.id } )
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Producto in the DB
 export function create(req, res) {
   Producto.createAsync(req.body)

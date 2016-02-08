@@ -3,6 +3,7 @@
 angular.module('adminInstruequiposApp')
   .controller('ProductosCtrl', function ($scope,Producto) {
     $scope.vista = 'listarProductos';
+    $scope.vistaProducto = 'ver';
 
     Producto.listar()
         .then(function(data) {

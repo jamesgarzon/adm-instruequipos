@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="bower_components/ng-inline-edit/dist/ng-inline-edit.min.css">
-<script src="bower_components/ng-inline-edit/dist/ng-inline-edit.min.js"></script>
-
 <header class="hero-unit" id="banner">
   <div class="container">
     <h1>Productos</h1>
@@ -21,14 +18,14 @@
 
     <div class="col-md-3">
       <button type="button" class="btn btn-primary">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear nuevo Producto
-  </button>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear nuevo Producto
+      </button>
     </div>
 
     <div class="col-md-4">
       <button type="button" class="btn btn-default" ng-click="cambiarVista('listarProductos')">
-    <span class="glyphicon glyphicon-list" aria-hidden="true" ></span> Listar Productos
-  </button>
+        <span class="glyphicon glyphicon-list" aria-hidden="true" ></span> Listar Productos
+      </button>
     </div>
 
   </div>
@@ -53,9 +50,9 @@
           <tbody ng-repeat="producto in productos | filter:buscarProducto" ng-click="seleccionarProducto(producto)">
             <td>{{producto.codigo}}</td>
             <td>{{producto.descripcion}}</td>
-            <td>{{producto.costo}}</td>
-            <td>{{producto.venta}}</td>
-            <td>{{producto.impuesto}}</td>
+            <td>{{producto.costo | currency}}</td>
+            <td>{{producto.venta | currency}}</td>
+            <td>{{producto.iva}}</td>
             <td>{{producto.stock}}</td>
             <td>{{producto.marca}}</td>
           </tbody>
@@ -66,64 +63,174 @@
   </div>
 
   <div ng-show="vista == 'VerProducto'">
-    <div class="table-responsive col-md-6 ">
-      <table class="table">
-        <tr>
-          <td><strong>Código </strong></td>
-          <td>{{productoSeleccionado.codigo}}</td>
-        </tr>
-        <tr>
-          <td><strong>Descripcion </strong></td>
-          <td>{{productoSeleccionado.descripcion}}</td>
-        </tr>
-        <tr>
-          <td><strong>Precio de costo </strong></td>
-          <td>{{productoSeleccionado.costo}}</td>
-        </tr>
-        <tr>
-          <td><strong>Precio de venta </strong></td>
-          <td>{{productoSeleccionado.venta}}</td>
-        </tr>
-        <tr>
-          <td><strong>Iva </strong></td>
-          <td>{{productoSeleccionado.impuesto}}</td>
-        </tr>
-        <tr>
-          <td><strong>Stock </strong></td>
-          <td>
-            <span
-            inline-edit="productoSeleccionado.stock"
-            inline-edit-validation="myValidator(newValue)"
-            inline-edit-btn-save="Save"
-            inline-edit-btn-cancel="Cancel">
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Marca </strong></td>
-          <td>
-            <span
-            inline-edit="productoSeleccionado.marca"
-            inline-edit-validation="myValidator(newValue)"
-            inline-edit-btn-save="Save"
-            inline-edit-btn-cancel="Cancel">
-            </span>
-          </td>
-        </tr>
-      </table>
-    </div>
 
-    <div class="col-md-5 col-md-offset-1">
+    <div class="table-responsive col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{productoSeleccionado.descripcion | uppercase}}</div>
+        <div class="panel-body">
+          <!-- <p>...</p> -->
+          <p>
 
-      <div class="row">
-        <button class="btn btn-warning" ng-click="actualizarProducto()">Actualizar Producto</button>
+          </p>
+
+
+          <div ng-show="vistaProducto=='ver'" >
+
+            <!-- <table class="table">
+              <tr>
+                <td><strong>Código </strong></td>
+                <td>{{productoSeleccionado.codigo}}</td>
+              </tr>
+              <tr>
+                <td><strong>Descripcion </strong></td>
+                <td>{{productoSeleccionado.descripcion}}</td>
+              </tr>
+              <tr>
+                <td><strong>Precio de costo </strong></td>
+                <td>{{productoSeleccionado.costo}}</td>
+              </tr>
+              <tr>
+                <td><strong>Precio de venta </strong></td>
+                <td>{{productoSeleccionado.venta}}</td>
+              </tr>
+              <tr>
+                <td><strong>Iva </strong></td>
+                <td>{{productoSeleccionado.iva}}</td>
+              </tr>
+              <tr>
+                <td><strong>Stock </strong></td>
+                <td>{{productoSeleccionado.stock}}</td>
+              </tr>
+              <tr>
+                <td><strong>Marca </strong></td>
+                <td>{{productoSeleccionado.marca}}</td>
+              </tr>
+            </table> -->
+            <!-- </div> -->
+
+
+            <!-- </div> -->
+
+            <div class="row text-center">
+
+              <div class="col-md-6" >
+                <button class="btn btn-danger" ng-click="eliminarProducto()">Eliminar Producto</button>
+              </div>
+
+              <div class="col-md-6">
+                <button class="btn btn-warning " ng-click="vistaProducto = 'editar'" >Actualizar Producto</button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Vista para editar producto -->
+          <div ng-show="vistaProducto=='editar'" >
+
+
+            <form class="form-horizontal">
+              <div class="row">
+
+                <!-- **************************** -->
+                <fieldset>
+
+
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionCodigo">Código</label>
+                    <div class="col-md-4">
+                      <input id="productoEdicionCodigo" name="productoEdicionCodigo" type="text" placeholder="Ingrese el código" class="form-control input-md" required="" ng-model="productoSeleccionado.codigo">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionDescripcion">Descripción</label>
+                    <div class="col-md-5">
+                      <input id="productoEdicionDescripcion" name="productoEdicionDescripcion" type="text" placeholder="ingrese la descripción" class="form-control input-md" required=""  ng-model="productoSeleccionado.descripcion">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionCosto">Precio de Costo</label>
+                    <div class="col-md-4">
+                      <input id="productoEdicionCosto" name="productoEdicionCosto" type="text" placeholder="Ingrese el costo" class="form-control input-md" required=""  ng-model="productoSeleccionado.costo">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionCosto">Precio de Venta</label>
+                    <div class="col-md-4">
+                      <input id="productoEdicionCosto" name="productoEdicionCosto" type="text" placeholder="Ingrese el precio de venta" class="form-control input-md" required=""  ng-model="productoSeleccionado.venta">
+                    </div>
+                  </div>
+
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionIva">Iva</label>
+                    <div class="col-md-2">
+                      <select id="productoEdicionIva" name="productoEdicionIva" class="form-control"  ng-model="productoSeleccionado.iva">
+                        <option value="16">16%</option>
+                        <option value="10">10%</option>
+                        <option value="0">0%</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionStock">Stock</label>
+                    <div class="col-md-2">
+                      <input id="productoEdicionStock" name="productoEdicionStock" type="text" placeholder="Ingrese el stock" class="form-control input-md"  ng-model="productoSeleccionado.stock">
+                    </div>
+                  </div>
+
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="productoEdicionMarca">Marca</label>
+                    <div class="col-md-4">
+                      <select id="productoEdicionMarca" name="productoEdicionMarca" class="form-control"  ng-model="productoSeleccionado.marca">
+                        <option value="NOVUS">Novus</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </fieldset>
+
+
+                <!-- ********************************* -->
+              </div>
+
+              <div class="row text-center" >
+
+                <div class="col-md-6 col-md-offset-6" >
+                  <button class="btn btn-primary" ng-click="eliminarProducto()">Aceptar</button>
+                  <button class="btn btn-default " ng-click="vistaProducto = 'ver'">Cancelar</button>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+
+
+          <br>
+        </div>
+
       </div>
-<br>
-      <div class="row">
-        <button class="btn btn-danger" ng-click="eliminarProducto()">Eliminar Producto</button>
-      </div>
+      <br>
+      <br>
 
-    </div>
+      <!-- <div class="col-md-5 col-md-offset-1 text-center">
+
+
+      <br>
+
+    </div> -->
 
 
   </div>

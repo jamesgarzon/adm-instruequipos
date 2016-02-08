@@ -38,7 +38,7 @@ servicio.crear = function (productoACrear) {
 
 servicio.actualizar = function (estudianteAActualizar) {
 
-	$http.put('/api/productos'+estudianteAActualizar._id, estudianteAActualizar)
+	$http.put('/api/productos/'+estudianteAActualizar._id, estudianteAActualizar)
 			.success(function(data) {
 					defered.resolve(data);
 			})
@@ -48,6 +48,21 @@ servicio.actualizar = function (estudianteAActualizar) {
 
 	return promise;
 };
+
+
+servicio.obtenerProducto = function (codigoProducto) {
+
+	$http.get('/api/productos/codigo/'+ codigoProducto)
+			.success(function(data) {
+					defered.resolve(data);
+			})
+			.error(function(err) {
+					defered.reject(err);
+			});
+
+	return promise;
+};
+
 
 
  return servicio;
