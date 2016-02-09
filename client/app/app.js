@@ -8,6 +8,7 @@ angular.module('adminInstruequiposApp', [
   'ngRoute',
   'ui.bootstrap',
   'angularInlineEdit'
+  // ,  'angularUtils.directives.dirPagination'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider

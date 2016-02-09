@@ -26,12 +26,17 @@ angular.module('adminInstruequiposApp')
       /* Confirmation modals */
       confirm: {
 
+                 /************************************************************************************/
+                /*********************  MODAL PARA CONFIRMAR ELIMINAR *******************************/
+                /************************************************************************************/
+
         /**
          * Create a function to open a delete confirmation modal (ex. ng-click='myModalFn(name, arg1, arg2...)')
          * @param  {Function} del - callback, ran when delete is confirmed
          * @return {Function}     - the function to open the modal (ex. myModalFn)
          */
-        delete(del = angular.noop) {
+
+        eliminar(del = angular.noop) {
           /**
            * Open a delete confirmation modal
            * @param  {String} name   - name or info to show on modal
@@ -40,34 +45,73 @@ angular.module('adminInstruequiposApp')
           return function() {
             var args = Array.prototype.slice.call(arguments),
                 name = args.shift(),
-                deleteModal;
+                modalEliminar;
 
-            deleteModal = openModal({
+            modalEliminar = openModal({
               modal: {
                 dismissable: true,
-                title: 'Confirm Delete',
-                html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
+                title: 'Confirmar eliminación',
+                html: '<p>¿Esta seguro que desea eliminar <strong>' + name + '</strong> ?</p>',
                 buttons: [{
                   classes: 'btn-danger',
-                  text: 'Delete',
+                  text: 'Eliminar',
                   click: function(e) {
-                    deleteModal.close(e);
+                    modalEliminar.close(e);
                   }
                 }, {
                   classes: 'btn-default',
-                  text: 'Cancel',
+                  text: 'Cancelar',
                   click: function(e) {
-                    deleteModal.dismiss(e);
+                    modalEliminar.dismiss(e);
                   }
                 }]
               }
             }, 'modal-danger');
 
-            deleteModal.result.then(function(event) {
+            modalEliminar.result.then(function(event) {
               del.apply(event, args);
             });
           };
+        },
+
+        actualizar(upd = angular.noop) {
+          /**
+           * Open a delete confirmation modal
+           * @param  {String} name   - name or info to show on modal
+           * @param  {All}           - any additional args are passed straight to del callback
+           */
+          return function() {
+            var args = Array.prototype.slice.call(arguments),
+                name = args.shift(),
+                modalActualizar;
+
+            modalActualizar = openModal({
+              modal: {
+                dismissable: true,
+                title: 'Confirmar Actualización',
+                html: '<p>¿Esta seguro que desea actualizar <strong>' + name + '</strong> ?</p>',
+                buttons: [{
+                  classes: 'btn-warning',
+                  text: 'actualizar',
+                  click: function(e) {
+                    modalActualizar.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancelar',
+                  click: function(e) {
+                    modalActualizar.dismiss(e);
+                  }
+                }]
+              }
+            }, 'modal-warning');
+
+            modalActualizar.result.then(function(event) {
+              upd.apply(event, args);
+            });
+          };
         }
+
       }
     };
   });

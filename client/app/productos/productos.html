@@ -11,7 +11,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label" for="textinput">Buscar</label>
         <div class="col-md-9">
-          <input id="textinput" name="textinput" type="text" placeholder="Buscar producto" class="form-control input-md">
+          <input id="textinput" name="textinput" type="text" placeholder="Buscar producto" class="form-control input-md" ng-model="buscarProducto">
         </div>
       </div>
     </div>
@@ -38,16 +38,18 @@
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
-            <th>Código</th>
-            <th>Descripción</th>
-            <th>Costo</th>
-            <th>Venta</th>
-            <th>Iva</th>
-            <th>Stock</th>
-            <th>Marca</th>
+            <th class="col-sm-1">Código</th>
+            <th class="col-sm-4">Descripción</th>
+            <th class="col-sm-1">Costo</th>
+            <th class="col-sm-1">Venta</th>
+            <th class="col-sm-1">Iva</th>
+            <th class="col-sm-1">Stock</th>
+            <th class="col-sm-2">Marca</th>
 
           </thead>
           <tbody ng-repeat="producto in productos | filter:buscarProducto" ng-click="seleccionarProducto(producto)">
+          <!-- <tbody dir-paginate="producto in productos | itemsPerPage: pageSize |  filter:buscarProducto" current-page="currentPage" ng-click="seleccionarProducto(producto)"> -->
+
             <td>{{producto.codigo}}</td>
             <td>{{producto.descripcion}}</td>
             <td>{{producto.costo | currency}}</td>
@@ -62,176 +64,9 @@
     </div>
   </div>
 
-  <div ng-show="vista == 'VerProducto'">
-
-    <div class="table-responsive col-md-6 col-md-offset-3">
-      <div class="panel panel-primary">
-        <!-- Default panel contents -->
-        <div class="panel-heading">{{productoSeleccionado.descripcion | uppercase}}</div>
-        <div class="panel-body">
-          <!-- <p>...</p> -->
-          <p>
-
-          </p>
-
-
-          <div ng-show="vistaProducto=='ver'" >
-
-            <!-- <table class="table">
-              <tr>
-                <td><strong>Código </strong></td>
-                <td>{{productoSeleccionado.codigo}}</td>
-              </tr>
-              <tr>
-                <td><strong>Descripcion </strong></td>
-                <td>{{productoSeleccionado.descripcion}}</td>
-              </tr>
-              <tr>
-                <td><strong>Precio de costo </strong></td>
-                <td>{{productoSeleccionado.costo}}</td>
-              </tr>
-              <tr>
-                <td><strong>Precio de venta </strong></td>
-                <td>{{productoSeleccionado.venta}}</td>
-              </tr>
-              <tr>
-                <td><strong>Iva </strong></td>
-                <td>{{productoSeleccionado.iva}}</td>
-              </tr>
-              <tr>
-                <td><strong>Stock </strong></td>
-                <td>{{productoSeleccionado.stock}}</td>
-              </tr>
-              <tr>
-                <td><strong>Marca </strong></td>
-                <td>{{productoSeleccionado.marca}}</td>
-              </tr>
-            </table> -->
-            <!-- </div> -->
-
-
-            <!-- </div> -->
-
-            <div class="row text-center">
-
-              <div class="col-md-6" >
-                <button class="btn btn-danger" ng-click="eliminarProducto()">Eliminar Producto</button>
-              </div>
-
-              <div class="col-md-6">
-                <button class="btn btn-warning " ng-click="vistaProducto = 'editar'" >Actualizar Producto</button>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Vista para editar producto -->
-          <div ng-show="vistaProducto=='editar'" >
-
-
-            <form class="form-horizontal">
-              <div class="row">
-
-                <!-- **************************** -->
-                <fieldset>
 
 
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionCodigo">Código</label>
-                    <div class="col-md-4">
-                      <input id="productoEdicionCodigo" name="productoEdicionCodigo" type="text" placeholder="Ingrese el código" class="form-control input-md" required="" ng-model="productoSeleccionado.codigo">
-                    </div>
-                  </div>
+<!-- <dir-pagination-controls></dir-pagination-controls> -->
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionDescripcion">Descripción</label>
-                    <div class="col-md-5">
-                      <input id="productoEdicionDescripcion" name="productoEdicionDescripcion" type="text" placeholder="ingrese la descripción" class="form-control input-md" required=""  ng-model="productoSeleccionado.descripcion">
-                    </div>
-                  </div>
-
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionCosto">Precio de Costo</label>
-                    <div class="col-md-4">
-                      <input id="productoEdicionCosto" name="productoEdicionCosto" type="text" placeholder="Ingrese el costo" class="form-control input-md" required=""  ng-model="productoSeleccionado.costo">
-                    </div>
-                  </div>
-
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionCosto">Precio de Venta</label>
-                    <div class="col-md-4">
-                      <input id="productoEdicionCosto" name="productoEdicionCosto" type="text" placeholder="Ingrese el precio de venta" class="form-control input-md" required=""  ng-model="productoSeleccionado.venta">
-                    </div>
-                  </div>
-
-                  <!-- Select Basic -->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionIva">Iva</label>
-                    <div class="col-md-2">
-                      <select id="productoEdicionIva" name="productoEdicionIva" class="form-control"  ng-model="productoSeleccionado.iva">
-                        <option value="16">16%</option>
-                        <option value="10">10%</option>
-                        <option value="0">0%</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionStock">Stock</label>
-                    <div class="col-md-2">
-                      <input id="productoEdicionStock" name="productoEdicionStock" type="text" placeholder="Ingrese el stock" class="form-control input-md"  ng-model="productoSeleccionado.stock">
-                    </div>
-                  </div>
-
-                  <!-- Select Basic -->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="productoEdicionMarca">Marca</label>
-                    <div class="col-md-4">
-                      <select id="productoEdicionMarca" name="productoEdicionMarca" class="form-control"  ng-model="productoSeleccionado.marca">
-                        <option value="NOVUS">Novus</option>
-                      </select>
-                    </div>
-                  </div>
-
-                </fieldset>
-
-
-                <!-- ********************************* -->
-              </div>
-
-              <div class="row text-center" >
-
-                <div class="col-md-6 col-md-offset-6" >
-                  <button class="btn btn-primary" ng-click="eliminarProducto()">Aceptar</button>
-                  <button class="btn btn-default " ng-click="vistaProducto = 'ver'">Cancelar</button>
-                </div>
-
-              </div>
-
-            </form>
-          </div>
-
-
-          <br>
-        </div>
-
-      </div>
-      <br>
-      <br>
-
-      <!-- <div class="col-md-5 col-md-offset-1 text-center">
-
-
-      <br>
-
-    </div> -->
-
-
-  </div>
-</div>
+ <!-- <dir-pagination-controls  boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls> -->

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('adminInstruequiposApp')
-  .controller('ProductosCtrl', function ($scope,Producto) {
+  .controller('ProductosCtrl', function ($scope,$location,Producto) {
     $scope.vista = 'listarProductos';
     $scope.vistaProducto = 'ver';
 
@@ -14,8 +14,9 @@ angular.module('adminInstruequiposApp')
       });
 
       $scope.seleccionarProducto = function (producto) {
-        $scope.productoSeleccionado = angular.copy(producto);
-        $scope.vista = 'VerProducto';
+        // $scope.productoSeleccionado = angular.copy(producto);
+        // $scope.vista = 'VerProducto';
+        $location.path('/productos/'+producto.codigo);
       }
       $scope.cambiarVista = function (nuevaVista) {
         $scope.vista = nuevaVista;
