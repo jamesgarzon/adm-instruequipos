@@ -5,17 +5,15 @@
     "angular": "~1.4.0",
     "json3": "~3.3.1",
     "es5-shim": "~3.0.1",
-    "bootstrap": "~3.1.1",
     "angular-resource": "~1.4.0",
     "angular-cookies": "~1.4.0",
     "angular-sanitize": "~1.4.0",
     "angular-route": "~1.4.0",
-    "angular-bootstrap": "~0.13.0",
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
-    "ng-inline-edit": "~0.7.0",
     "angular-locale_es-co": "https://code.angularjs.org/1.5.0/i18n/angular-locale_es-co.js",
-    "angularUtils-pagination": "angular-utils-pagination#^0.10.0"
+    "Materialize": "materialize#^0.97.5",
+    "angular-materialize": "^0.1.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

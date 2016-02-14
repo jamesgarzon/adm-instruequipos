@@ -1,8 +1,18 @@
 'use strict';
 
+  $(document).ready(function() {
+      $('select').material_select();
+      $('input, textarea').characterCounter();
+      $('.modal-trigger').leanModal();
+      // $('.button-collapse').sideNav();
+      $('.collapsible').collapsible();
+  });
+
 (function() {
 
 class MainController {
+
+
 
   constructor($http) {
     this.$http = $http;

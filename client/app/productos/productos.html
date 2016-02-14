@@ -1,4 +1,4 @@
-<header class="hero-unit" id="banner">
+<header class="hero-unit  teal" id="banner">
   <div class="container">
     <h1>Productos</h1>
   </div>
@@ -16,40 +16,27 @@
       </div>
     </div>
 
-    <div class="col-md-3">
-      <button type="button" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear nuevo Producto
-      </button>
-    </div>
-
-    <div class="col-md-4">
-      <button type="button" class="btn btn-default" ng-click="cambiarVista('listarProductos')">
-        <span class="glyphicon glyphicon-list" aria-hidden="true" ></span> Listar Productos
-      </button>
-    </div>
-
   </div>
-
-  <hr>
 
   <div class="row" ng-show="vista=='listarProductos'">
     <div class="col-lg-12">
 
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <th class="col-sm-1">Código</th>
-            <th class="col-sm-4">Descripción</th>
-            <th class="col-sm-1">Costo</th>
-            <th class="col-sm-1">Venta</th>
-            <th class="col-sm-1">Iva</th>
-            <th class="col-sm-1">Stock</th>
-            <th class="col-sm-2">Marca</th>
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th data-field="codigo" class="col-sm-1">Código</th>
+            <th data-field="descripcion" class="col-sm-4">Descripción</th>
+            <th data-field="costo" class="col-sm-1">Costo</th>
+            <th data-field="venta" class="col-sm-1">Venta</th>
+            <th data-field="iva" class="col-sm-1">Iva</th>
+            <th data-field="stock" class="col-sm-1">Stock</th>
+            <th data-field="marca" class="col-sm-2">Marca</th>
+          </tr>
+        </thead>
 
-          </thead>
-          <tbody ng-repeat="producto in productos | filter:buscarProducto" ng-click="seleccionarProducto(producto)">
-          <!-- <tbody dir-paginate="producto in productos | itemsPerPage: pageSize |  filter:buscarProducto" current-page="currentPage" ng-click="seleccionarProducto(producto)"> -->
+        <tbody>
 
+          <tr ng-repeat="producto in productos | filter:buscarProducto | orderBy:'descripcion'" ng-click="seleccionarProducto(producto)">
             <td>{{producto.codigo}}</td>
             <td>{{producto.descripcion}}</td>
             <td>{{producto.costo | currency}}</td>
@@ -57,16 +44,87 @@
             <td>{{producto.iva}}</td>
             <td>{{producto.stock}}</td>
             <td>{{producto.marca}}</td>
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
   </div>
 
+  <!-- floating button for creating product -->
+  <div class="fixed-action-btn" style="bottom:45px; right:24px;">
+    <a class="waves-effect waves-light btn modal-trigger btn-floating btn-large red" href="#modal-product-form" ng-click="showCreateForm()"><i class="large material-icons">add</i></a>
+  </div>
 
 
+  <!-- modal for for creating new product -->
+  <div id="modal-product-form" class="modal">
+    <div class="modal-content">
+      <h4 id="modal-product-title">Crear un nuevo producto</h4>
+      <div class="row">
+        <form class="col m12">
+          <div class="row">
+            <div class="input-field col l6 s12">
+              <i class="material-icons prefix">book</i>
+              <input id="input_codigo" type="text" class="validate" ng-model="nuevoProducto.codigo" length="10" required>
+              <label for="input_codigo" data-error="wrong" >Código</label>
+            </div>
+          </div>
 
-<!-- <dir-pagination-controls></dir-pagination-controls> -->
+          <div class="row">
+            <div class="input-field col m12">
+              <i class="material-icons prefix">description</i>
+              <textarea id="textarea1" class="materialize-textarea" ng-model="nuevoProducto.descripcion" required></textarea>
+              <label for="textarea1">Textarea</label>
+            </div>
+          </div>
 
- <!-- <dir-pagination-controls  boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls> -->
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <i class="material-icons prefix">monetization_on</i>
+              <input id="input_costo" type="number" class="validate" ng-model="nuevoProducto.costo" required>
+              <label for="input_costo">Valor costo</label>
+            </div>
+            <div class="input-field col m6 s12">
+              <select ng-model="nuevoProducto.iva" material-select watch required>
+                <!-- <option value="" disabled selected>Choose your option</option> -->
+                <option value="16">16%</option>
+                <option value="10">10%</option>
+                <option value="5">5%</option>
+                <option value="0">0%</option>
+              </select>
+              <label>Iva</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <i class="material-icons prefix">monetization_on</i>
+              <input id="input_venta" type="number" class="validate" ng-model="nuevoProducto.venta" required>
+              <label for="input_venta">Valor venta</label>
+            </div>
+
+            <div class="input-field col m6 s12">
+              <select class="" ng-model="nuevoProducto.marca" material-select watch required>
+                <option ng-repeat="value in marcas">{{value.nombre}}</option>
+              </select>
+              <label>Marca</label>
+            </div>
+          </div>
+
+          <div class="row right-align">
+            <div class="col m6 s12 offset-1">
+
+            </div>
+            <a class="btn waves-effect waves-light " type="submit" name="action" ng-click="crearProducto(nuevoProducto)">Crear
+              <i class="material-icons right">send</i>
+            </a>
+
+          </div>
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>

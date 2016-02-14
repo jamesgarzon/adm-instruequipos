@@ -6,8 +6,9 @@ angular.module('adminInstruequiposApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap',
-  'angularInlineEdit'
+  'ui.materialize'
+  // 'ui.bootstrap',
+  // 'angularInlineEdit'
   // ,  'angularUtils.directives.dirPagination'
 ])
   .config(function($routeProvider, $locationProvider) {
@@ -17,4 +18,9 @@ angular.module('adminInstruequiposApp', [
       });
 
     $locationProvider.html5Mode(true);
+
+          $(document).ready(function() {
+              $('.button-collapse').sideNav();
+          });
+
   });

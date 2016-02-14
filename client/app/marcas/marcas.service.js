@@ -1,16 +1,14 @@
 'use strict';
 angular.module('adminInstruequiposApp')
-.factory('Producto',function($http, $route, $q){
+.factory('Marca',function($http, $route, $q){
 
 var servicio = {};
-
-
 
 // Servicio para listar productos
 servicio.listar = function () {
 	var defered = $q.defer();
 	var promise = defered.promise;
-	$http.get('/api/productos')
+	$http.get('/api/marcas')
 			.success(function(data) {
 					defered.resolve(data);
 			})
@@ -23,10 +21,10 @@ servicio.listar = function () {
 
 // Servicio para crear un nuevo productos
 // parametro productoACrear => objeto estudiante que se va a actualizar
-servicio.crear = function (productoACrear) {
+servicio.crear = function (marcaACrear) {
 	var defered = $q.defer();
 	var promise = defered.promise;
-	$http.post('/api/productos', productoACrear)
+	$http.post('/api/marcas', marcaACrear)
 			.success(function(data) {
 					defered.resolve(data);
 			})
@@ -37,10 +35,10 @@ servicio.crear = function (productoACrear) {
 	return promise;
 };
 
-servicio.actualizar = function (estudianteAActualizar) {
+servicio.actualizar = function (marcaAActualizar) {
 	var defered = $q.defer();
 	var promise = defered.promise;
-	$http.put('/api/productos/'+estudianteAActualizar._id, estudianteAActualizar)
+	$http.put('/api/marcas/'+marcaAActualizar._id, marcaAActualizar)
 			.success(function(data) {
 					defered.resolve(data);
 			})
@@ -52,10 +50,10 @@ servicio.actualizar = function (estudianteAActualizar) {
 };
 
 
-servicio.obtenerProducto = function (codigoProducto) {
+servicio.obtener = function (codigoProducto) {
 	var defered = $q.defer();
 	var promise = defered.promise;
-	$http.get('/api/productos/codigo/'+ codigoProducto)
+	$http.get('/api/marcas/codigo/'+ codigoProducto)
 			.success(function(data) {
 					defered.resolve(data);
 			})
@@ -69,7 +67,7 @@ servicio.obtenerProducto = function (codigoProducto) {
 servicio.eliminar = function (idProducto) {
 	var defered = $q.defer();
 	var promise = defered.promise;
-	$http.delete('/api/productos/'+ idProducto)
+	$http.delete('/api/marcas/codigo/'+ idProducto)
 			.success(function(data) {
 					defered.resolve(data);
 			})
