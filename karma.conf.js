@@ -23,6 +23,8 @@ module.exports = function(config) {
       'client/bower_components/Materialize/bin/materialize.js',
       'client/bower_components/materialize/bin/materialize.js',
       'client/bower_components/angular-materialize/src/angular-materialize.js',
+      'client/bower_components/pdfmake/build/pdfmake.js',
+      'client/bower_components/pdfmake/build/vfs_fonts.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',
