@@ -2,10 +2,10 @@
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
-var MarcaSchema = new mongoose.Schema({
-  nombre: String,
+var VentaSchema = new mongoose.Schema({
+  name: String,
   info: String,
   active: Boolean
 });
 
-export default mongoose.model('Marca', MarcaSchema);
+export default mongoose.model('Venta', VentaSchema);

@@ -20,4 +20,27 @@ angular.module('adminInstruequiposApp')
     });
 
 
+
+    for (var i = 0; i < 500; i++) {
+      $scope.nuevoCliente = {
+        "nit": ""+i,
+        "nombre": "Cliente",
+        "telefono": "555-55-55",
+        "fax": "4575121",
+        "ciudad": "Medellín",
+        "direccion": "Calle 5487",
+        "email": "cliente@instruequipos.com",
+        "tipo_persona": 1,
+        "gran_contribuyente": 0
+      };
+      // Cliente.crear($scope.nuevoCliente)
+      //     .then(function(data) {
+      //         // $scope.clientes = data;
+      //     })
+      //     .catch(function(err) {
+      //       console.log(err);
+      //   });
+    }
+
+
   });
