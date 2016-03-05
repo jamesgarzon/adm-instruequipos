@@ -1,7 +1,15 @@
 'use strict';
 
 angular.module('adminInstruequiposApp')
-  .controller('PedidoNuevoCtrl', function ($scope, Cliente) {
+  .controller('PedidoNuevoCtrl', function ($scope, Cliente, Producto) {
+
+    $scope.hoy = new Date();
+    $scope.items = [{codigo:'',descripcion:'',cantidad:0,valor:0}
+    ];
+
+    $scope.agregarItem = function () {
+      $scope.items.push({codigo:'',descripcion:'',cantidad:0,valor:0})
+    }
     // $scope.checked = true;
     $scope.vendedores = [{
         tipo_documento : "CC",
@@ -32,8 +40,22 @@ angular.module('adminInstruequiposApp')
           console.log(err);
       });
 
-    }
+    };
+
+    $scope.listarProductos = function () {
+    Producto.listar()
+        .then(function(data) {
+            $scope.productos = data;
+        })
+        .catch(function(err) {
+          console.log(err);
+      });
+
+    };
+
 
     $scope.listarClientes();
+    $scope.listarProductos();
+
 
   });

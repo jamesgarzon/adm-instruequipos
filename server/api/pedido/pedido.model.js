@@ -19,7 +19,7 @@ var PedidoSchema = new mongoose.Schema({
     email: String,
     tipo_persona: Number,
     gran_contribuyente: Number,
-    compradores : [
+    comprador :
       {
         tipo_documento : String,
         documento : String,
@@ -29,7 +29,6 @@ var PedidoSchema = new mongoose.Schema({
         direccion : String,
         email : String
       }
-    ]
   },
   vendedor : {
     tipo_documento : String,
@@ -43,8 +42,9 @@ var PedidoSchema = new mongoose.Schema({
   fecha_emision : String,
   fecha_solicitud : String,
   fecha_entrega : String,
-  medio_pago : String,
+  tipo_pago : String,
   observaciones : String,
+  orden_compra : String,
   items : [
     {
       codigo : String,

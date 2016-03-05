@@ -12,7 +12,6 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-locale_es-co": "https://code.angularjs.org/1.5.0/i18n/angular-locale_es-co.js",
-    "Materialize": "materialize#^0.97.5",
     "angular-materialize": "^0.1.2",
     "pdfmake": "^0.1.20"
   },

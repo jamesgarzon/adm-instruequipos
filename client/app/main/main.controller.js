@@ -1,12 +1,12 @@
 'use strict';
 
   $(document).ready(function() {
-      $('select').material_select();
-      $('input, textarea').characterCounter();
-      $('.modal-trigger').leanModal();
-      // $('.button-collapse').sideNav();
-      $('.collapsible').collapsible();
+      // $('select').material_select();
+      // $('input, textarea').characterCounter();
+      // $('.modal-trigger').leanModal();
+      // $('.collapsible').collapsible();
   });
+      // $('.button-collapse').sideNav();
 
 (function() {
 
