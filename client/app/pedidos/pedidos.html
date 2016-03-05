@@ -1,0 +1,27 @@
+<header class="hero-unit  teal" id="banner">
+  <div class="container">
+    <h1>Mis pedidos</h1>
+  </div>
+</header>
+
+<a class="btn-floating btn-large waves-effect waves-light red" href="/pedidos/nuevo"><i class="material-icons">add</i></a>
+
+<table class="responsive-table">
+  <thead>
+    <tr>
+      <td> Nro Pedido </td>
+      <td> Cliente </td>
+      <td> Fecha de emisión </td>
+      <td> Fecha de entrega </td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="pedido in pedidos">
+      <td>{{pedido.pedidoId}} </td>
+      <td>{{pedido.cliente.nombre}} </td>
+      <td>{{pedido.fecha_emision | date}} </td>
+      <td>{{pedido.fecha_entrega | date}} </td>
+    </tr>
+  </tbody>
+</table>

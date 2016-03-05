@@ -24,8 +24,12 @@
       <link rel="stylesheet" href="app/clientes/clientes.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/marcas/marcas.css">
+      <link rel="stylesheet" href="app/pedidoNuevo/pedidoNuevo.css">
+      <link rel="stylesheet" href="app/pedidos/pedidos.css">
       <link rel="stylesheet" href="app/productos/producto/producto.css">
       <link rel="stylesheet" href="app/productos/productos.css">
+      <link rel="stylesheet" href="components/footer/footer.css">
+      <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -35,9 +39,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <nav class="teal">
+    <!-- <nav class="teal">
         <div class="nav-wrapper">
-          <!-- <a href="#!" class="brand-logo">Instruequipos</a> -->
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
             <li><a href="home">Inicio</a></li>
@@ -55,11 +58,12 @@
             <li><a href="">James Garzón</a></li>
           </ul>
         </div>
-      </nav>
+      </nav> -->
+      <navbar></navbar>
 
     <div ng-view=""></div>
 
-    <footer class="page-footer teal">
+    <!-- <footer class="page-footer teal">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
@@ -73,7 +77,7 @@
           Desarrollado por: <a class="grey-text text-lighten-4" href="http://www.github.com/jamesgarzon">James Garzón Otálvaro</a>
             </div>
           </div>
-        </footer>
+        </footer> -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -110,20 +114,31 @@
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
-      <script src="app/marcas/marcas.js"></script>
-      <script src="app/app.constant.js"></script>
+      <script src="components/util/util.module.js"></script>
+      <script src="app/pedidos/pedidos.js"></script>
       <script src="app/clientes/clientes.js"></script>
       <script src="app/clientes/clientes.service.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
       <script src="app/marcas/marcas.controller.js"></script>
-      <script src="app/clientes/clientes.controller.js"></script>
+      <script src="app/marcas/marcas.js"></script>
       <script src="app/marcas/marcas.service.js"></script>
+      <script src="app/pedidoNuevo/pedidoNuevo.controller.js"></script>
+      <script src="app/pedidoNuevo/pedidoNuevo.js"></script>
+      <script src="app/pedidos/pedidos.controller.js"></script>
+      <script src="app/clientes/clientes.controller.js"></script>
+      <script src="app/pedidos/pedidos.service.js"></script>
       <script src="app/productos/producto/producto.controller.js"></script>
       <script src="app/productos/producto/producto.js"></script>
       <script src="app/productos/productos.controller.js"></script>
       <script src="app/productos/productos.js"></script>
       <script src="app/productos/productos.service.js"></script>
+      <script src="components/footer/footer.directive.js"></script>
+      <script src="components/modal/modal.service.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.directive.js"></script>
+      <script src="app/app.constant.js"></script>
+      <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
 

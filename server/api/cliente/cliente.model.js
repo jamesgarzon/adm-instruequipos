@@ -11,7 +11,18 @@ var ClienteSchema = new mongoose.Schema({
   direccion: String,
   email: String,
   tipo_persona: Number,
-  gran_contribuyente: Number
+  gran_contribuyente: Number,
+  compradores : [
+    {
+      tipo_documento : String,
+      documento : String,
+      nombres : String,
+      apellidos : String,
+      telefono : String,
+      direccion : String,
+      email : String
+    }
+  ]
 });
 
 export default mongoose.model('Cliente', ClienteSchema);

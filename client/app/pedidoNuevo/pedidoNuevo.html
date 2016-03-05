@@ -1,0 +1,50 @@
+<header class="hero-unit  teal" id="banner">
+  <div class="container">
+    <h1>Nuevo pedido</h1>
+  </div>
+</header>
+<br>
+
+<div class="container">
+  <div class="row">
+    <h5>Información Básica </h5>
+    <p class=" grey-text text-lighten-1">Aquí se ingresa la información básica del pedido, como cliente, comprador, etc.</p>
+  </div>
+
+<!-- SELECT CLIENTE -->
+  <div class="row">
+    <div class="input-field col l4 m6 s12">
+      <select ng-model="nuevoPedido.cliente"
+      ng-options="cliente.nombre  for cliente in clientes"material-select watch required>
+      <option value="" disabled=""> Seleccione un cliente </option>
+    </select>
+    <label>Cliente</label>
+  </div>
+
+<input type="button" name="name" value="hey" ng-disabled="checked">
+<!-- SELECT COMPRADOR -->
+  <div class="input-field col l4 m6 s12 " >
+    <select  ng-model="nuevoPedido.vendedor"
+    ng-options="vendedor.nombres   for vendedor in vendedores"material-select watch required  >
+    <option value="" disabled=""> Seleccione un vendedor </option>
+  </select>
+  <label>Vendedor</label>
+</div>
+
+<p>
+      <input type="checkbox" id="test5" ng-model="checked"/>
+      <label for="test5">Red</label>
+    </p>
+
+<!-- SELECT VENDEDOR -->
+<div class="input-field col l4 m6 s12" >
+  <select ng-model="nuevoPedido.vendedor"
+  ng-options="vendedor.nombres   for vendedor in vendedores"material-select watch required>
+  <option value="" disabled=""> Seleccione un vendedor </option>
+</select>
+<label>Vendedor</label>
+</div>
+
+</div>
+
+</div>
