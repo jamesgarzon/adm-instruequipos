@@ -1,20 +1,30 @@
 
-<h5>ORDEN DE PEDIDO</h5>
+<div class="row">
 
-<div class="row z-depth-1">
+  <div class="col s4">
+    <img ng-src="assets/images/logo.png" alt="instruequipos" height="80px" />
+  </div>
+
   <div class="col s8">
-    <font size="1">
+    <h5>ORDEN DE PEDIDO</h5>
+  </div>
 
-CLIENTE: {{pedido.cliente.nombre}}  <br>
-COMPRADOR: {{pedido.cliente.comprador.nombres}} <br>
-ORDEN DE COMPRA:  {{pedido.orden_compra}} <br>
-TELEFONO: {{pedido.cliente.telefono}} <br>
+</div>
+
+<div class="row" style="border-style: solid;border-width: thin;">
+  <div class="col s8">
+    <font size="1" >
+
+      CLIENTE: {{pedido.cliente.nombre}}  <br>
+      COMPRADOR: {{pedido.cliente.comprador.nombres}} <br>
+      ORDEN DE COMPRA:  {{pedido.orden_compra}} <br>
+      TELEFONO: {{pedido.cliente.telefono}} <br>
     <font >
 
   </div>
 
 <div class="col s4">
-<font size="1">
+<font size="1" >
   PEDIDO NRO. {{pedido.pedidoId}}
   <br>
   VENDEDOR: {{pedido.vendedor.nombres}}
@@ -28,7 +38,39 @@ TELEFONO: {{pedido.cliente.telefono}} <br>
 </div>
 </div>
 
-<table default>
+<div class="row">
+  <div class="col s1">
+    CODIGO
+  </div>
+  <div class="col s1">
+    CANT.
+  </div>
+  <div class="col s8">
+    DESCRICIÓN
+  </div>
+  <div class="col s2">
+    VALOR UNIT.
+  </div>
+
+  <div ng-repeat="item in pedido.items">
+
+  <div class="col s1" style="border-style: solid;border-width: thin;min-height: 1px;">
+    {{item.codigo}}
+  </div>
+  <div class="col s1" style="border-style: solid;border-width: thin;min-height: 1px;">
+  {{item.cantidad}}
+  </div>
+  <div class="col s8" style="border-style: solid;border-width: thin;min-height: 1px;">
+    <font size="1" class="">
+{{item.descripcion}}</font>
+  </div>
+  <div class="col s2" style="border-style: solid;border-width: thin;min-height: 1px;">
+    {{item.venta | currency:'$':0}}
+  </div>
+  </div>
+</div>
+
+<!-- <table default>
   <thead>
     <tr>
       <td>CODIGO</td>
@@ -46,4 +88,4 @@ TELEFONO: {{pedido.cliente.telefono}} <br>
       <td>{{item.venta | currency:'$':0}}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
