@@ -1,3 +1,4 @@
+<navbar></navbar>
 <header class="hero-unit  teal" id="banner">
   <div class="container">
     <h1>Mis pedidos</h1>
@@ -18,10 +19,10 @@
 
   <tbody>
     <tr ng-repeat="pedido in pedidos">
-      <td>{{pedido.pedidoId}} </td>
-      <td>{{pedido.cliente.nombre}} </td>
-      <td>{{pedido.fecha_emision | date}} </td>
-      <td>{{pedido.fecha_entrega | date}} </td>
+      <td> <a href="/pedidos/ver/{{pedido._id}}">{{pedido.pedidoId}} </a></td>
+      <td> <a href="/pedidos/ver/{{pedido._id}}">{{pedido.cliente.nombre}} </a></td>
+      <td> <a href="/pedidos/ver/{{pedido._id}}">{{pedido.fecha_emision | date}} </a></td>
+      <td> <a href="/pedidos/ver/{{pedido._id}}">{{pedido.fecha_entrega | date}} </a></td>
     </tr>
   </tbody>
 </table>

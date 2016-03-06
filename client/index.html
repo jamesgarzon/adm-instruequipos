@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+      <link rel="stylesheet" href="bower_components/allmighty-autocomplete/style/autocomplete.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -23,6 +24,7 @@
       <link rel="stylesheet" href="app/clientes/clientes.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/marcas/marcas.css">
+      <link rel="stylesheet" href="app/pedido/pedido.css">
       <link rel="stylesheet" href="app/pedidoNuevo/pedidoNuevo.css">
       <link rel="stylesheet" href="app/pedidos/pedidos.css">
       <link rel="stylesheet" href="app/productos/producto/producto.css">
@@ -58,7 +60,6 @@
           </ul>
         </div>
       </nav> -->
-      <navbar></navbar>
 
     <div ng-view=""></div>
 
@@ -107,13 +108,14 @@
       <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
       <script src="bower_components/pdfmake/build/pdfmake.js"></script>
       <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
+      <script src="bower_components/allmighty-autocomplete/script/autocomplete.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/pedidos/pedidos.js"></script>
+      <script src="app/pedidos/pedidos.controller.js"></script>
       <script src="app/clientes/clientes.js"></script>
       <script src="app/clientes/clientes.service.js"></script>
       <script src="app/main/main.controller.js"></script>
@@ -121,10 +123,12 @@
       <script src="app/marcas/marcas.controller.js"></script>
       <script src="app/marcas/marcas.js"></script>
       <script src="app/marcas/marcas.service.js"></script>
+      <script src="app/pedido/pedido.controller.js"></script>
+      <script src="app/pedido/pedido.js"></script>
       <script src="app/pedidoNuevo/pedidoNuevo.controller.js"></script>
       <script src="app/pedidoNuevo/pedidoNuevo.js"></script>
-      <script src="app/pedidos/pedidos.controller.js"></script>
       <script src="app/clientes/clientes.controller.js"></script>
+      <script src="app/pedidos/pedidos.js"></script>
       <script src="app/pedidos/pedidos.service.js"></script>
       <script src="app/productos/producto/producto.controller.js"></script>
       <script src="app/productos/producto/producto.js"></script>
@@ -140,8 +144,6 @@
       <!-- endinjector -->
     <!-- endbuild -->
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
 
 
 

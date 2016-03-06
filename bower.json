@@ -13,7 +13,9 @@
     "lodash": "~2.4.1",
     "angular-locale_es-co": "https://code.angularjs.org/1.5.0/i18n/angular-locale_es-co.js",
     "angular-materialize": "^0.1.2",
-    "pdfmake": "^0.1.20"
+    "pdfmake": "^0.1.20",
+    "allmighty-autocomplete": "https://github.com/JustGoscha/allmighty-autocomplete.git",
+    "icon": "https://fonts.googleapis.com/icon?family=Material+Icons"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

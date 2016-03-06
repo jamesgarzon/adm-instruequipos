@@ -1,3 +1,5 @@
+<navbar></navbar>
+
 <header class="hero-unit  teal" id="banner">
   <div class="container">
     <h1>Nuevo pedido</h1>
@@ -33,9 +35,9 @@
     <label>Cliente</label>
   </div>
 
-  <!-- INPUT ORDEN DE COMPRA -->
+  <!-- INPUT COMPRADOR-->
   <div class="input-field col l6 m6 s12">
-    <input  type="text" class="validate" id="comprador" ng-model="nuevoPedido.cliente.comprador.nombre" required>
+    <input  type="text" class="validate" id="comprador" ng-model="nuevoPedido.cliente.comprador.nombres" required>
     <label for="comprador">Comprador</label>
   </div>
 
@@ -50,8 +52,8 @@
 
 <!-- ORDEN DE COMPRA -->
 <div class="input-field col l6 m6 s12">
-  <input  type="text" class="validate" id="comprador" ng-model="nuevoPedido.orden_compra" required>
-  <label for="comprador">Nro. orden de compra</label>
+  <input  type="text" class="validate" id="ordenCompra" ng-model="nuevoPedido.orden_compra" required>
+  <label for="ordenCompra">Nro. orden de compra</label>
 </div>
 
 <!-- DATEPICKER FECHA DE SOLICITUD -->
@@ -91,7 +93,12 @@
 
 
 <div class="divider"></div>
-<div class="row">
+</div>
+
+
+<!-- <div class="row"> -->
+  <div class="container">
+
 
   <h5>Ingresar items </h5>
   <div class="col s12 m6 l6">
@@ -100,88 +107,108 @@
 
   <!-- Modal Trigger -->
   <div class="col s12 m6 l6 right-align">
-    <a class="btn-floating waves-effect waves-light red" href='#demoModal' modal><i class="material-icons">add</i></a>
+    <!-- <a class="btn-floating waves-effect waves-light red" href='#demoModal' modal><i class="material-icons">add</i></a> -->
+    <!-- <a class="btn-floating waves-effect waves-light red" ng-click="agregarItem()"><i class="material-icons">add</i></a> -->
+  </div>
+
+
+<div class="row">
+
+  <!-- BUSQUEDA -->
+  <div class="input-field col l2 m4 s12">
+    <input  type="text" class="validate" id="busquedaProducto" ng-model="busquedaProducto" required>
+    <label for="busquedaProducto">Filtrar</label>
+  </div>
+
+<!-- SELECCIONAR PRODUCTO -->
+  <div class="input-field col l10 m8 s12" >
+    <select ng-model="nuevoItem"
+    ng-options="producto.descripcion  for producto in productos | orderBy:'descripcion' | filter:busquedaProducto"material-select watch required>
+      <option value="" disabled=""> Seleccione un producto </option>
+  </select>
+  <label>Producto</label>
+</div>
+
+</div>
+
+<div class="row">
+
+
+  <!-- CODIGO -->
+  <div class="input-field col l2 m6 s12">
+    <input  type="text" class="validate" id="codigo" ng-model="nuevoItem.codigo">
+    <label for="codigo">Código</label>
+  </div>
+
+  <!-- DESCRIPCION -->
+  <div class="input-field col l5 m6 s12">
+    <input  type="text" class="validate" id="descripcion" ng-model="nuevoItem.descripcion" >
+    <label for="descripcion">descripcion</label>
+  </div>
+
+  <!-- CANTIDAD -->
+  <div class="input-field col l1 m6 s12">
+    <input  type="number" class="validate" id="cantidad" ng-model="nuevoItem.cantidad" >
+    <label for="cantidad">cantidad</label>
+  </div>
+
+  <!-- VALOR -->
+  <div class="input-field col l3 m6 s12">
+    <input  type="number" class="validate" id="valor" ng-model="nuevoItem.valor_unitario" required>
+    <label for="valor">Valor</label>
+  </div>
+
+  <div class="col l1">
+    <a class="btn-floating waves-effect waves-light blue" ng-click="agregarItem(nuevoItem)"><i class="material-icons">add</i></a>
+  </div>
+
   </div>
 
 </div>
 
+<div class="container z-depth-1">
 
-<!-- ITEMS -->
-<table class="bordered">
+<table class="bordered" ng-if="items.length>0">
   <thead>
-    <tr>
-      <td data-field="codigo">Código </td>
-      <td data-field="cantidad">Cantidad </td>
-      <td data-field="descripcion">Descripción </td>
-      <td data-field="valor">Valor </td>
+    <tr class="teal">
+      <td width="5%" data-field="eliminar"> </td>
+      <td width="10%" data-field="codigo">CÓDIGO </td>
+      <td width="50%" data-field="descripcion">DESCRIPCIÓN</td>
+      <td width="5%" data-field="cantidad">CANT. </td>
+      <td width="15%" data-field="valor">VALOR UNITARIO </td>
+      <td width="25%" data-field="total" class="right-align "><h6>TOTAL</h6></td>
     </tr>
-  </thead>
+    </thead>
 
   <tbody>
     <tr ng-repeat="item in items" class="">
-      <td WIDTH="10"><input type="text" ng-model="item.codigo"> </td>
-      <td WIDTH="10"><input type="number" ng-model="item.cantidad"></td>
-      <td WIDTH="70"><input type="text" ng-model="item.descripcion"></td>
-      <td WIDTH="10"><input type="number" ng-model="item.valor"></td>
+      <td><a class="btn-floating waves-effect waves-light red" ng-click="eliminarItem(item)"><i class="material-icons">delete</i></a> </td>
+      <td><input type="text" ng-model="item.codigo" disabled> </td>
+      <td><input type="text" ng-model="item.descripcion"></td>
+      <td><input type="number" ng-model="item.cantidad"></td>
+      <td><input type="number" ng-model="item.valor_unitario"></td>
+      <td class="right-align "> <p > <strong> {{item.cantidad*item.valor_unitario | currency:'$':0}}</p> </strong></td>
+
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><h5>GRAN TOTAL:</h5></td>
+      <td class="right-align "> <h5> {{ getTotal() | currency }}</h5>
+      </td>
+
     </tr>
   </tbody>
 </table>
+</div>
 
+<br><br>
+<div class="container center-align">
+<a class="btn btn-large waves-effect waves-light " ng-click="generarPedido()"><i class="material-icons">shopping_cart</i> Generar pedido</a>
 
 </div>
 
-<!-- Modal Structure -->
-<div id="demoModal" class="modal  modal-fixed-footer">
-<!-- CONTENIDO MODAL -->
-  <div class="modal-content">
 
-    <h4>Nuevo item</h4>
-
-    <div class="row">
-
-
-    <!-- SELECT PRODUCTO -->
-    <div class="input-field col s12" >
-      <select ng-model="nuevoProducto"
-      ng-options="producto.descripcion  for producto in productos | orderBy:'descripcion' "material-select watch required>
-      <option value="" disabled=""> Seleccione un producto </option>
-    </select>
-    <label>Código</label>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- CODIGO -->
-  <div class="input-field col l6 m6 s12">
-    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
-    <label for="codigo">Código</label>
-  </div>
-
-  <!-- CODIGO -->
-  <div class="input-field col l6 m6 s12">
-    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
-    <label for="codigo">Código</label>
-  </div>
-
-  <!-- CODIGO -->
-  <div class="input-field col l6 m6 s12">
-    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
-    <label for="codigo">Código</label>
-  </div>
-
-  <!-- CODIGO -->
-  <div class="input-field col l6 m6 s12">
-    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
-    <label for="codigo">Código</label>
-  </div>
-
-
-
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div>
-</div>
 
 <footer></footer>

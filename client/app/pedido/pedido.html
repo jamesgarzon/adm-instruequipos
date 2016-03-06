@@ -1,0 +1,49 @@
+
+<h5>ORDEN DE PEDIDO</h5>
+
+<div class="row z-depth-1">
+  <div class="col s8">
+    <font size="1">
+
+CLIENTE: {{pedido.cliente.nombre}}  <br>
+COMPRADOR: {{pedido.cliente.comprador.nombres}} <br>
+ORDEN DE COMPRA:  {{pedido.orden_compra}} <br>
+TELEFONO: {{pedido.cliente.telefono}} <br>
+    <font >
+
+  </div>
+
+<div class="col s4">
+<font size="1">
+  PEDIDO NRO. {{pedido.pedidoId}}
+  <br>
+  VENDEDOR: {{pedido.vendedor.nombres}}
+  <br>
+  FECHA SOLICITUD : {{pedido.fecha_solicitud | date}}
+  <br>
+  FECHA ENTREGA : {{pedido.fecha_entrega | date}}
+  <br>
+  TIPO DE PAGO : {{pedido.tipo_pago | uppercase}}
+</font>
+</div>
+</div>
+
+<table default>
+  <thead>
+    <tr>
+      <td>CODIGO</td>
+      <td>CANT.</td>
+      <td>DESCRIPCIÓN</td>
+      <td>VALOR UNITARIO</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="item in pedido.items">
+      <td>{{item.codigo}}</td>
+      <td>{{item.cantidad}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>{{item.venta | currency:'$':0}}</td>
+    </tr>
+  </tbody>
+</table>

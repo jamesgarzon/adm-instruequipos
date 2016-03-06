@@ -1,0 +1,226 @@
+<header class="hero-unit  teal" id="banner">
+  <div class="container">
+    <h1>Nuevo pedido</h1>
+  </div>
+</header>
+<br>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col s12 m6 l6">
+      <h5>Información Básica </h5>
+      <p class=" grey-text text-lighten-1">Aquí se ingresa la información básica del pedido, como cliente, comprador, etc.</p>
+    </div>
+
+    <div class="col s12 m6 l6 right-align">
+      <h5>Fecha de emisión</h5>
+      <p class=" gray-text text-lighten-1">{{hoy | date:'fullDate'}}</p>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <!-- SELECT CLIENTE -->
+    <div class="input-field col l6 m6 s12">
+      <select ng-model="nuevoPedido.cliente"
+      ng-options="cliente.nombre  for cliente in clientes"material-select watch required>
+      <option value="" disabled=""> Seleccione un cliente </option>
+    </select>
+    <label>Cliente</label>
+  </div>
+
+  <!-- INPUT ORDEN DE COMPRA -->
+  <div class="input-field col l6 m6 s12">
+    <input  type="text" class="validate" id="comprador" ng-model="nuevoPedido.cliente.comprador.nombre" required>
+    <label for="comprador">Comprador</label>
+  </div>
+
+  <!-- SELECT VENDEDOR -->
+  <div class="input-field col l6 m6 s12" >
+    <select ng-model="nuevoPedido.vendedor"
+    ng-options="vendedor.nombres   for vendedor in vendedores"material-select watch required>
+    <option value="" disabled=""> Seleccione un vendedor </option>
+  </select>
+  <label>Vendedor</label>
+</div>
+
+<!-- ORDEN DE COMPRA -->
+<div class="input-field col l6 m6 s12">
+  <input  type="text" class="validate" id="comprador" ng-model="nuevoPedido.orden_compra" required>
+  <label for="comprador">Nro. orden de compra</label>
+</div>
+
+<!-- DATEPICKER FECHA DE SOLICITUD -->
+<div class=" col l6 m6 s12">
+  <label>Fecha de solicitud</label>
+  <input type="date" class="datepicker"  ng-model="nuevoPedido.fecha_solicitud" required>
+</div>
+
+
+<!-- DATEPICKER FECHA DE SOLICITUD -->
+<div class=" col l6 m6 s12">
+  <label>Fecha de entrega</label>
+  <input type="date" class="datepicker"  ng-model="nuevoPedido.fecha_entrega" required>
+</div>
+
+
+<!-- TIPO DE PAGO -->
+<div class="input-field col l6 m6 s12" >
+  <select ng-model="nuevoPedido.tipo_pago" material-select watch required>
+    <option value="" disabled=""> Seleccione un tipo de pago </option>
+    <option value="credito"> Crédito </option>
+    <option value="contado"> Contado </option>
+  </select>
+  <label>Tipo de pago</label>
+</div>
+
+<div class="row">
+  <form class="col s12 m6 l6">
+    <div class="input-field col s12">
+      <textarea id="textarea1" class="materialize-textarea" ng-model="nuevoPedido.observaciones"></textarea>
+      <label for="textarea1">Observaciones</label>
+    </div>
+  </form>
+</div>
+
+</div>
+
+
+<div class="divider"></div>
+</div>
+
+
+<div class="row">
+  <div class="container">
+
+
+  <h5>Ingresar items </h5>
+  <div class="col s12 m6 l6">
+    <p class=" grey-text text-lighten-1">Aquí se ingresan los items que van a ir en la orden de pedido</p>
+  </div>
+
+  <!-- Modal Trigger -->
+  <div class="col s12 m6 l6 right-align">
+    <!-- <a class="btn-floating waves-effect waves-light red" href='#demoModal' modal><i class="material-icons">add</i></a> -->
+    <a class="btn-floating waves-effect waves-light red" ng-click="agregarItem()"><i class="material-icons">add</i></a>
+  </div>
+  </div>
+
+</div>
+
+
+<!-- ITEMS -->
+<table class="bordered">
+  <col width="300">
+  <col width="10">
+  <col width="150">
+  <col width="100">
+  <col width="500">
+  <col width="100">
+  <!-- <col width="80"> -->
+  <thead>
+    <tr>
+      <td data-field="valor">Buscar </td>
+      <td data-field="valor"> </td>
+      <td data-field="codigo">Código </td>
+      <td data-field="cantidad">Cantidad </td>
+      <td data-field="descripcion">Descripción del producto - editable</td>
+      <td data-field="valor">Valor </td>
+      <td data-field="valor">TOTAL </td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="item in items" class="">
+      <td> <autocomplete ng-model="yourchoose" data="nombreProductos" on-type="updateMovies"></autocomplete> </td>
+      <td> {{seleccionarItem(item, yourchoose)}} </td>
+      <td><input type="text" ng-model="item.codigo"> </td>
+      <td><input type="number" ng-model="item.cantidad"></td>
+      <td><input type="text" ng-model="item.descripcion"></td>
+      <td><input type="text" ng-model="item.valor"></td>
+      <td>{{item.cantidad*item.valor | currency}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h5 class="right-align">
+  Total: {{ getTotal() | currency }}
+</h5>
+
+
+
+
+<!-- <div>
+  <autocomplete ng-model="yourchoice" data="nombreProductos" on-type="updateMovies"></autocomplete>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- MODAL -->
+
+<!-- Modal Structure -->
+<div id="demoModal" class="modal  modal-fixed-footer">
+<!-- CONTENIDO MODAL -->
+  <div class="modal-content">
+
+    <h4>Nuevo item</h4>
+
+    <div class="row">
+
+
+    <!-- SELECT PRODUCTO -->
+    <div class="input-field col s12" >
+      <select ng-model="nuevoProducto"
+      ng-options="producto.descripcion  for producto in productos | orderBy:'descripcion' "material-select watch required>
+      <option value="" disabled=""> Seleccione un producto </option>
+    </select>
+    <label>Código</label>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CODIGO -->
+  <div class="input-field col l6 m6 s12">
+    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
+    <label for="codigo">Código</label>
+  </div>
+
+  <!-- CODIGO -->
+  <div class="input-field col l6 m6 s12">
+    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
+    <label for="codigo">Código</label>
+  </div>
+
+  <!-- CODIGO -->
+  <div class="input-field col l6 m6 s12">
+    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
+    <label for="codigo">Código</label>
+  </div>
+
+  <!-- CODIGO -->
+  <div class="input-field col l6 m6 s12">
+    <input  type="text" class="validate" id="codigo" ng-model="nuevoProducto.codigo" required>
+    <label for="codigo">Código</label>
+  </div>
+
+
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+<footer></footer>

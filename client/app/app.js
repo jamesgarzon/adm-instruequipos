@@ -6,7 +6,8 @@ angular.module('adminInstruequiposApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.materialize'
+  'ui.materialize',
+  'autocomplete'
   // 'ui.bootstrap',
   // 'angularInlineEdit'
   // ,  'angularUtils.directives.dirPagination'
